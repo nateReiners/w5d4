@@ -50,7 +50,17 @@ function Game () {
     }
   };
 
-  this.get_move = reader.question()
+  this.get_move = function() {
+      reader.question("enter start & end (s, e)", function(coords) {
+      let coordsArray = coords.split(",");
+      let s = parseInt(coordsArray[0]);
+      let e = parseInt(coordsArray[1]);
+
+      console.log(`Start Tower: ${s}, End Tower: ${e}`);
+      this.make_move(s, e);
+      this.get_move();
+    });
+  };
 
   // this.run = function() {
   //   while (this.game_over() !== true) {
@@ -62,7 +72,7 @@ function Game () {
 
 let x = new Game;
 x.render_towers();
-x.make_move(0,2);
+x.get_move();
 x.render_towers();
-x.make_move(0, 2);
+
 console.log(x.game_over());
