@@ -50,29 +50,33 @@ function Game () {
     }
   };
 
-  this.get_move = function() {
+  const callback = function(sIdx, eIdx) {
+    console.log(`Start Tower: ${s}, End Tower: ${e}`);
+  }
+
+  this.get_move = function(callback) {
+    this.render_towers();
+    let that = this;
       reader.question("enter start & end (s, e)", function(coords) {
       let coordsArray = coords.split(",");
       let s = parseInt(coordsArray[0]);
       let e = parseInt(coordsArray[1]);
 
-      console.log(`Start Tower: ${s}, End Tower: ${e}`);
-      this.make_move(s, e);
-      this.get_move();
+      callback(s, e);
     });
+
   };
 
-  // this.run = function() {
-  //   while (this.game_over() !== true) {
-  //
-  //   }
-  // };
+  this.run = function() {
+    let times = 10;
+    for (let i = 0; i < times; i++) {
+      console.log(`TurnNumber: ${i}`);
+      this.get_move();
+    }
+    console.log("game over");
+  };
 
 }
 
 let x = new Game;
-x.render_towers();
-x.get_move();
-x.render_towers();
-
-console.log(x.game_over());
+x.run();
