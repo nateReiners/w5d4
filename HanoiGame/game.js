@@ -50,9 +50,6 @@ function Game () {
     }
   };
 
-  const callback = function(sIdx, eIdx) {
-    console.log(`Start Tower: ${s}, End Tower: ${e}`);
-  }
 
   this.get_move = function(callback) {
     this.render_towers();
